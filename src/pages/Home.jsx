@@ -18,7 +18,7 @@ const navLinks = [
   { name: "About", to: "/portfolio#about" },
   { name: "Projects", to: "/portfolio#projects" },
   { name: "Skills", to: "/portfolio#skills" },
-  { name: "Resume", to: "/portfolio#resume" },
+  { name: "Experience", to: "/portfolio#experience" },
   { name: "Contact", to: "/portfolio#contact" },
 ];
 

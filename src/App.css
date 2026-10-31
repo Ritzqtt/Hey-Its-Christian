@@ -236,6 +236,7 @@
 }
 
 .section-container {
+  --section-copy-width: 750px;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -352,6 +353,11 @@
     transform: none;
     transition: none;
   }
+
+  .portfolio-page--reveal-ready #experience.is-visible .experience-entry-content,
+  .portfolio-page--reveal-ready #experience.is-visible .education-entry {
+    animation: none;
+  }
 }
 
 .section-label {
@@ -375,7 +381,7 @@
 }
 
 .section-intro {
-  max-width: 750px;
+  max-width: var(--section-copy-width);
   color: #aaa;
   font-size: 16px;
   line-height: 1.8;
@@ -384,42 +390,290 @@
 
 
 /* =================================
-   RESUME SECTION
+   EXPERIENCE SECTION
 ================================= */
 
-.resume-grid {
+.experience-content {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 42px;
 }
 
-.resume-card {
-  background: #111;
-  border-left: 3px solid #16c76a;
-  padding: 25px;
+.experience-subtitle {
+  margin-bottom: 24px;
+  color: #f5f5f5;
+  font-size: 21px;
+  font-weight: 600;
 }
 
-.resume-card h3 {
+.experience-timeline {
+  position: relative;
+  display: grid;
+  gap: 28px;
+  margin: 0;
+  padding: 0 0 0 27px;
+  list-style: none;
+}
+
+.experience-timeline::before {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 5px;
+  width: 1px;
+  background: rgba(22, 199, 106, 0.45);
+  content: "";
+}
+
+.experience-entry {
+  position: relative;
+  min-width: 0;
+}
+
+.experience-entry::before {
+  position: absolute;
+  top: 5px;
+  left: -27px;
+  width: 11px;
+  height: 11px;
+  border: 2px solid #16c76a;
+  border-radius: 50%;
+  background: #080808;
+  content: "";
+}
+
+.experience-entry-content,
+.education-entry {
+  min-width: 0;
+}
+
+@keyframes experienceFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.portfolio-page--reveal-ready #experience.is-visible .experience-entry-content,
+.portfolio-page--reveal-ready #experience.is-visible .education-entry {
+  animation: experienceFadeUp 0.45s ease both;
+}
+
+.portfolio-page--reveal-ready
+  #experience.is-visible
+  .experience-entry:nth-child(2)
+  .experience-entry-content {
+  animation-delay: 0.1s;
+}
+
+.experience-dates {
+  margin-bottom: 8px;
   color: #16c76a;
-  margin-bottom: 18px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
-.resume-card h4 {
+.experience-entry h4,
+.education-entry h4 {
+  margin-bottom: 6px;
+  color: #f5f5f5;
   font-size: 18px;
-  margin-bottom: 10px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
-.resume-card p {
+.experience-company-trigger {
+  display: block;
+  max-width: 100%;
+  margin: 0 0 14px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #d0d0d0;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: left;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease;
+}
+
+.experience-company-trigger:hover {
+  color: #16c76a;
+}
+
+.experience-company-trigger:focus-visible,
+.location-modal-close:focus-visible,
+.experience-map-link:focus-visible {
+  outline: 2px solid #16c76a;
+  outline-offset: 3px;
+}
+
+.location-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(5px);
+  animation: locationBackdropIn 0.2s ease both;
+}
+
+.experience-map-link {
+  display: inline-block;
+  color: #16c76a;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.experience-map-link:hover {
+  color: #fff;
+}
+
+@keyframes locationBackdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.location-modal {
+  width: min(640px, 100%);
+  overflow: hidden;
+  border: 1px solid #303a33;
+  border-radius: 8px;
+  background: #101310;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.55);
+  animation: experienceFadeUp 0.25s ease both;
+}
+
+.location-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 68px;
+  padding: 14px 16px;
+}
+
+.location-modal-pin {
+  display: inline-flex;
+  flex: 0 0 24px;
+  color: #16c76a;
+}
+
+.location-modal-pin svg {
+  width: 24px;
+  height: 24px;
+}
+
+.location-modal-header h3 {
+  flex: 1;
+  min-width: 0;
+  color: #f5f5f5;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.location-modal-close {
+  display: inline-flex;
+  flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #aaa;
+  font: inherit;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.location-modal-close:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #16c76a;
+}
+
+.location-modal-map {
+  display: block;
+  width: 100%;
+  height: 360px;
+  border: 0;
+  background: #171a17;
+}
+
+.location-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 20px;
+}
+
+.experience-responsibilities {
+  max-width: var(--section-copy-width);
+  margin: 14px 0 0;
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.education-block {
+  padding-top: 32px;
+  border-top: 1px solid #292929;
+}
+
+.education-entry {
+  position: relative;
+  padding-left: 27px;
+}
+
+.education-entry::before {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 11px;
+  height: 11px;
+  border: 2px solid #16c76a;
+  border-radius: 50%;
+  background: #080808;
+  content: "";
+}
+
+.education-entry > p:not(.experience-dates) {
   color: #aaa;
   font-size: 14px;
   line-height: 1.8;
+  overflow-wrap: anywhere;
 }
 
-.resume-card span {
-  display: block;
+.education-entry .education-location {
+  margin-bottom: 8px;
+}
+
+.education-entry .education-graduation {
+  margin-top: 8px;
   color: #16c76a;
-  font-size: 13px;
-  margin-top: 12px;
 }
 
 
@@ -638,13 +892,28 @@
     scroll-margin-top: var(--navbar-height);
   }
 
-  .projects-grid,
-  .resume-grid {
+  .projects-grid {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
+  .experience-content {
+    gap: 32px;
+  }
+
+  .experience-timeline {
+    gap: 24px;
+  }
+
+  .location-modal-backdrop {
+    padding: 16px;
+  }
+
+  .location-modal-map {
+    height: min(52vh, 320px);
+  }
+
   .skill-category {
     grid-template-columns: minmax(0, 1fr);
     gap: 14px;
