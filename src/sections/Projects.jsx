@@ -4,16 +4,7 @@ const projects = [
     category: "Web-Based Accounting System",
     description:
       "A web-based accounting system designed to manage financial transactions, bank reconciliation, payroll summaries, and tax computations.",
-    technologies: ["React.js", "JavaScript", "MySQL"],
-    github: "",
-    status: "In Development",
-  },
-  {
-    title: "Personal Portfolio",
-    category: "Personal Website",
-    description:
-      "A personal portfolio website showcasing my background, technical skills, projects, and development journey.",
-    technologies: ["React.js", "JavaScript", "CSS"],
+    technologies: ["React.js", "JavaScript", "HTML","CSS","Node.js", "Express.js", "Supabase", "PostgreSQL"],
     github: "",
     status: "In Development",
   },
