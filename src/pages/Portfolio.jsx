@@ -4,9 +4,9 @@ import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 import About from "../sections/About";
-import Resume from "../sections/Resume";
-import Skills from "../sections/Skills";
 import Projects from "../sections/Projects";
+import Skills from "../sections/Skills";
+import Resume from "../sections/Resume";
 import Contact from "../sections/Contact";
 
 function Portfolio() {
@@ -87,9 +87,9 @@ function Portfolio() {
 
       <main>
         <About />
-        <Resume />
-        <Skills />
         <Projects />
+        <Skills />
+        <Resume />
         <Contact />
       </main>
 
