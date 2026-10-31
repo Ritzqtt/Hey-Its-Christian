@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 * {
   margin: 0;
@@ -6,16 +6,60 @@
   box-sizing: border-box;
 }
 
+:root {
+  --navbar-height: 83px;
+  --section-gap: 56px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 76px;
+    --section-gap: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --navbar-height: 76px;
+  }
+}
+
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
+  background: #000000;
 }
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #000;
+  background: transparent;
   color: #f5f5f5;
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+#root {
+  position: relative;
+  z-index: 0;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+/* Hide the page scrollbar but keep scrolling */
+
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
 
 ::selection {

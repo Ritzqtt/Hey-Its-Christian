@@ -7,11 +7,12 @@ function About() {
         <div className="section-line" />
 
         <p className="section-intro">
-          Hello! I'm Christian Barcoma, a junior student
-          from Rizal Technological University. I'm passionate
-          about technology, programming, and web development.
-          I enjoy learning new technologies and creating
-          applications that solve real-world problems.
+          Hello! I'm Christian Barcoma, a senior BS in Information Technology 
+          student at Rizal Technological University. I'm passionate 
+          about web development, particularly frontend and backend 
+          development. I enjoy building applications, solving problems, 
+          and continuously learning new technologies as I work toward 
+          becoming a professional web developer.
         </p>
       </div>
     </section>

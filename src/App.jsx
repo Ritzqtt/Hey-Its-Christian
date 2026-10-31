@@ -1,50 +1,21 @@
-import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
-
-import About from "./sections/About";
-import Resume from "./sections/Resume";
-import Skills from "./sections/Skills";
-import Services from "./sections/Services";
-import Projects from "./sections/Projects";
-import Contact from "./sections/Contact";
+import Portfolio from "./pages/Portfolio";
+import ParticleNetwork from "./components/ParticleNetwork";
 
 import "./App.css";
 
 function App() {
-  const [showNavbar, setShowNavbar] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowNavbar(
-        window.scrollY > window.innerHeight - 100
-      );
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <>
-      <Home />
+      <ParticleNetwork />
 
-      {showNavbar && <Navbar />}
-
-      <main>
-        <About />
-        <Resume />
-        <Skills />
-        <Services />
-        <Projects />
-        <Contact />
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="*" element={<Home />} />
+      </Routes>
     </>
   );
 }
