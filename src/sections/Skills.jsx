@@ -17,7 +17,7 @@ const skillCategories = [
   },
   {
     title: "DESIGN & PRODUCTIVITY TOOLS",
-    skills: ["Figma", "Canva", "Google Workspace", "Microsoft Suite"],
+    skills: ["Canva", "Figma", "Google Workspace", "Lucid", "Microsoft Suite"],
   },
   {
     title: "SOFT SKILLS",
