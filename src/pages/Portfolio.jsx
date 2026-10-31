@@ -6,7 +6,6 @@ import Navbar from "../components/Navbar";
 import About from "../sections/About";
 import Resume from "../sections/Resume";
 import Skills from "../sections/Skills";
-import Services from "../sections/Services";
 import Projects from "../sections/Projects";
 import Contact from "../sections/Contact";
 
@@ -90,7 +89,6 @@ function Portfolio() {
         <About />
         <Resume />
         <Skills />
-        <Services />
         <Projects />
         <Contact />
       </main>
@@ -111,7 +109,7 @@ function Portfolio() {
             })
           }
         >
-          ↑
+          Back to Top ↑
         </button>
       </footer>
     </div>
