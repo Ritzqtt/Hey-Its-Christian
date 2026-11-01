@@ -45,14 +45,20 @@ function Portfolio() {
       return;
     }
 
-    // Wait for the section to be laid out before scrolling.
-    const frame = requestAnimationFrame(() => {
+    const mobileTabletTarget =
+      id !== "about" &&
+      window.matchMedia("(max-width: 1024px)").matches;
+    const scrollToSection = () => {
       const section = document.getElementById(id);
 
       if (!section) return;
 
       const navbar = document.querySelector(".navbar");
-      const navbarHeight = navbar ? navbar.offsetHeight : 0;
+      const navbarHeight = navbar
+        ? mobileTabletTarget
+          ? navbar.getBoundingClientRect().height
+          : navbar.offsetHeight
+        : 0;
       const top =
         section.getBoundingClientRect().top + window.scrollY - navbarHeight;
 
@@ -62,10 +68,27 @@ function Portfolio() {
           ? "auto"
           : "smooth",
       });
-    });
+    };
+
+    // On compact layouts the drawer is still collapsing when the route changes.
+    // Measure the fixed header only after its max-height transition has finished.
+    const waitForMenuClose =
+      mobileTabletTarget &&
+      window.matchMedia("(max-width: 900px)").matches;
+    let frame = null;
+    let menuCloseTimer = null;
+
+    if (waitForMenuClose) {
+      menuCloseTimer = window.setTimeout(() => {
+        frame = window.requestAnimationFrame(scrollToSection);
+      }, 320);
+    } else {
+      frame = window.requestAnimationFrame(scrollToSection);
+    }
 
     return () => {
-      cancelAnimationFrame(frame);
+      if (frame !== null) cancelAnimationFrame(frame);
+      if (menuCloseTimer !== null) window.clearTimeout(menuCloseTimer);
     };
   }, [location.pathname, location.hash, location.key, location.state]);
 
