@@ -6,6 +6,7 @@ import {
 } from "../utils/pageTransition";
 
 import Navbar from "../components/Navbar";
+import FloatingBackToTop from "../components/FloatingBackToTop";
 
 import About from "../sections/About";
 import Projects from "../sections/Projects";
@@ -99,6 +100,7 @@ function Portfolio() {
           Back to Top ↑
         </button>
       </footer>
+      <FloatingBackToTop />
     </div>
   );
 }
