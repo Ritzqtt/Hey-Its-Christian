@@ -324,6 +324,9 @@ html[data-scroll="up"] .navbar-links a.active::after {
   border-radius: 50%;
   background: #080808;
   color: #16c76a;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   font: inherit;
   font-size: 24px;
   line-height: 1;
@@ -334,7 +337,9 @@ html[data-scroll="up"] .navbar-links a.active::after {
   transition:
     opacity 0.25s ease,
     transform 0.25s ease,
-    background-color 0.2s ease;
+    box-shadow 0.25s ease-out,
+    background-color 0.25s ease-out,
+    border-color 0.25s ease-out;
 }
 
 .floating-back-to-top.is-visible {
@@ -343,8 +348,94 @@ html[data-scroll="up"] .navbar-links a.active::after {
   transform: translateY(0);
 }
 
-.floating-back-to-top:hover {
-  background: rgba(22, 199, 106, 0.12);
+.floating-back-to-top:active {
+  transform: scale(0.94);
+}
+
+.floating-back-to-top.is-tapped {
+  border-color: #16c76a;
+  background: rgba(22, 199, 106, 0.18);
+  box-shadow:
+    0 0 0 6px rgba(22, 199, 106, 0.18),
+    0 0 24px rgba(22, 199, 106, 0.45);
+  transform: translateY(-3px) scale(1.08);
+}
+
+.floating-back-to-top-arrow {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.floating-back-to-top.is-tapped .floating-back-to-top-arrow,
+.floating-back-to-top:focus-visible .floating-back-to-top-arrow {
+  animation: floating-back-to-top-arrow-tap 450ms ease-out;
+}
+
+.floating-back-to-top-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(22, 199, 106, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  animation: floating-back-to-top-ripple 600ms ease-out forwards;
+}
+
+.floating-back-to-top:focus-visible::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(22, 199, 106, 0.35);
+  content: "";
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  animation: floating-back-to-top-ripple 600ms ease-out forwards;
+}
+
+@keyframes floating-back-to-top-arrow-tap {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes floating-back-to-top-ripple {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2.2);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .floating-back-to-top:hover {
+    background: rgba(22, 199, 106, 0.12);
+  }
+}
+
+.floating-back-to-top:focus-visible {
+  border-color: #16c76a;
+  background: rgba(22, 199, 106, 0.18);
+  box-shadow:
+    0 0 0 6px rgba(22, 199, 106, 0.18),
+    0 0 24px rgba(22, 199, 106, 0.45);
+  transform: translateY(-3px) scale(1.08);
 }
 
 .floating-back-to-top:focus-visible {
@@ -381,7 +472,29 @@ html[data-scroll="up"] .navbar-links a.active::after {
 
 @media (prefers-reduced-motion: reduce) {
   .floating-back-to-top {
-    transition: none;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .floating-back-to-top:active,
+  .floating-back-to-top.is-tapped,
+  .floating-back-to-top:focus-visible {
+    box-shadow: none;
+    transform: none;
+  }
+
+  .floating-back-to-top.is-tapped .floating-back-to-top-arrow,
+  .floating-back-to-top:focus-visible .floating-back-to-top-arrow,
+  .floating-back-to-top-ripple,
+  .floating-back-to-top:focus-visible::after {
+    animation: none;
+  }
+
+  .floating-back-to-top.is-tapped,
+  .floating-back-to-top:focus-visible {
+    background: rgba(22, 199, 106, 0.18);
+    border-color: #16c76a;
   }
 }
 

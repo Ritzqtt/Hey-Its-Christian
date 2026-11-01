@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 const MOBILE_TABLET_QUERY = "(max-width: 1024px)";
@@ -14,6 +14,18 @@ function FloatingBackToTop() {
       typeof window !== "undefined" &&
       window.matchMedia(MOBILE_TABLET_QUERY).matches &&
       window.scrollY > 400
+  );
+  const [isTapped, setIsTapped] = useState(false);
+  const [tapSequence, setTapSequence] = useState(0);
+  const tapTimerRef = useRef(null);
+
+  useEffect(
+    () => () => {
+      if (tapTimerRef.current !== null) {
+        window.clearTimeout(tapTimerRef.current);
+      }
+    },
+    []
   );
 
   useEffect(() => {
@@ -51,23 +63,43 @@ function FloatingBackToTop() {
 
   if (!isMobileOrTablet) return null;
 
+  const handleClick = () => {
+    setIsTapped(true);
+    setTapSequence((sequence) => sequence + 1);
+    if (tapTimerRef.current !== null) {
+      window.clearTimeout(tapTimerRef.current);
+    }
+    tapTimerRef.current = window.setTimeout(() => {
+      setIsTapped(false);
+      tapTimerRef.current = null;
+    }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 300 : 600);
+
+    window.scrollTo({
+      top: 0,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
+  };
+
   return createPortal(
     <button
       type="button"
-      className={`floating-back-to-top${isVisible ? " is-visible" : ""}`}
+      className={`floating-back-to-top${isVisible ? " is-visible" : ""}${isTapped ? " is-tapped" : ""}`}
       aria-label="Back to top"
       tabIndex={isVisible ? 0 : -1}
-      onClick={() =>
-        window.scrollTo({
-          top: 0,
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
-            .matches
-            ? "auto"
-            : "smooth",
-        })
-      }
+      onClick={handleClick}
     >
-      ↑
+      <span className="floating-back-to-top-arrow" aria-hidden="true">
+        ↑
+      </span>
+      {isTapped && (
+        <span
+          key={tapSequence}
+          className="floating-back-to-top-ripple"
+          aria-hidden="true"
+        />
+      )}
     </button>,
     document.body
   );

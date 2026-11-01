@@ -16,8 +16,14 @@ const responseJson = (status: number, body: Record<string, unknown>) =>
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const recipient = "cobarcoma@gmail.com";
+const deno = (globalThis as typeof globalThis & {
+  Deno: {
+    serve: (handler: (req: Request) => Response | Promise<Response>) => void;
+    env: { get: (name: string) => string | undefined };
+  };
+}).Deno;
 
-Deno.serve(async (req: Request) => {
+deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
@@ -87,8 +93,8 @@ Deno.serve(async (req: Request) => {
     });
   }
 
-  const apiKey = Deno.env.get("RESEND_API_KEY");
-  const from = Deno.env.get("RESEND_FROM_EMAIL");
+  const apiKey = deno.env.get("RESEND_API_KEY");
+  const from = deno.env.get("RESEND_FROM_EMAIL");
 
   if (!apiKey || !from) {
     console.error(
