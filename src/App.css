@@ -163,15 +163,43 @@
   height: 2px;
   background: #16c76a;
   transform: scaleX(0);
-  transform-origin: left;
+  transform-origin: right;
   transition: transform 0.3s ease;
 }
 
-.navbar-links a:hover::after,
 .navbar-links a.active::after,
-.home-navigation a:hover::after,
 .home-navigation a.active::after {
   transform: scaleX(1);
+  transform-origin: left;
+}
+
+.navbar-links a:focus-visible::after,
+.home-navigation a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+html[data-scroll="up"] .navbar-links a:not(.active):not(:hover):not(:focus-visible)::after {
+  transform-origin: left;
+}
+
+html[data-scroll="up"] .navbar-links a.active::after {
+  transform-origin: right;
+}
+
+@media (hover: hover) {
+  .navbar-links a:hover::after,
+  .home-navigation a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-links a::after,
+  .home-navigation a::after {
+    transition: none;
+  }
 }
 
 /* Scroll progress bar */

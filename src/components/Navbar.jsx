@@ -122,6 +122,34 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    const root = document.documentElement;
+    let lastY = window.scrollY;
+    let timer;
+
+    const onScroll = () => {
+      const y = window.scrollY;
+
+      if (y !== lastY) {
+        root.dataset.scroll = y > lastY ? "down" : "up";
+        lastY = y;
+      }
+
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        delete root.dataset.scroll;
+      }, 700);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.clearTimeout(timer);
+      delete root.dataset.scroll;
+    };
+  }, []);
+
+  useEffect(() => {
     if (!menuOpen) return undefined;
 
     const closeOnEscape = (event) => {
