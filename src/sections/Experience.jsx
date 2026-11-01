@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import useTimelineFill from "../hooks/useTimelineFill";
 
 const experiences = [
   {
     id: "visible-technologies",
-    title: "Web Developer (Internship)",
+    title: "Full-Stack Developer (Internship)",
     company: "Visible Technologies International Corp.",
     dates: "January 2026 – March 2026",
     address: "G/F Ridgewood Square, C-5 Avenue, Brgy. Ususan, Taguig, 1632",
@@ -24,8 +25,15 @@ const experiences = [
 
 function Experience() {
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const timelineRef = useRef(null);
+  const experienceMarkerRefs = useRef({});
+  const educationTimelineRef = useRef(null);
+  const educationMarkerRefs = useRef({});
   const closeButtonRef = useRef(null);
   const locationTriggerRefs = useRef({});
+
+  useTimelineFill(timelineRef, experienceMarkerRefs);
+  useTimelineFill(educationTimelineRef, educationMarkerRefs, true);
 
   useEffect(() => {
     if (!selectedLocation) return undefined;
@@ -63,9 +71,16 @@ function Experience() {
               Experience
             </h3>
 
-            <ol className="experience-timeline">
+            <ol className="experience-timeline" ref={timelineRef}>
               {experiences.map((experience) => (
                 <li className="experience-entry" key={experience.title}>
+                  <span
+                    ref={(element) => {
+                      experienceMarkerRefs.current[experience.id] = element;
+                    }}
+                    className="experience-marker"
+                    aria-hidden="true"
+                  />
                   <article className="experience-entry-content">
                     <p className="experience-dates">{experience.dates}</p>
                     <h4>{experience.title}</h4>
@@ -95,7 +110,14 @@ function Experience() {
               Education
             </h3>
 
-            <div className="education-entry">
+            <div className="education-entry" ref={educationTimelineRef}>
+              <span
+                ref={(element) => {
+                  educationMarkerRefs.current.education = element;
+                }}
+                className="education-marker"
+                aria-hidden="true"
+              />
               <p className="experience-dates">2023 – Present</p>
               <h4>Rizal Technological University – Boni Campus</h4>
               <p className="education-location">Boni Avenue, Mandaluyong</p>
