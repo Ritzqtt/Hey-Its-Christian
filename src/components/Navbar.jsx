@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import usePageTransition from "../hooks/usePageTransition";
 
 const navLinks = [
   { name: "About", to: "/portfolio#about" },
@@ -120,6 +121,7 @@ function ScrollProgress() {
 function Navbar() {
   const [activeSection, setActiveSection] = useState("about");
   const [menuOpen, setMenuOpen] = useState(false);
+  const goToPage = usePageTransition(() => setMenuOpen(false));
 
   useEffect(() => {
     const root = document.documentElement;
@@ -194,7 +196,7 @@ function Navbar() {
         <Link
           to="/"
           className="navbar-logo"
-          onClick={() => setMenuOpen(false)}
+          onClick={(event) => goToPage(event, "/")}
         >
           Christian Barcoma
         </Link>
@@ -225,7 +227,7 @@ function Navbar() {
                 key={link.name}
                 to={link.to}
                 className={id === activeSection ? "active" : ""}
-                onClick={() => setMenuOpen(false)}
+                onClick={(event) => goToPage(event, link.to)}
               >
                 <span>&gt;</span> {link.name}
               </Link>

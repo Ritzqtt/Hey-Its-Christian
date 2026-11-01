@@ -346,17 +346,61 @@ html[data-scroll="up"] .navbar-links a.active::after {
   animation: contentSlideIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.portfolio-page--reveal-ready .page-section .section-container {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.65s ease,
-    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+@keyframes pageTransitionExit {
+  to {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.98);
+  }
 }
 
-.portfolio-page--reveal-ready .page-section.is-visible .section-container {
-  opacity: 1;
-  transform: translateY(0);
+.page-transition-leaving {
+  animation: pageTransitionExit 0.5s ease-in-out forwards;
+}
+
+@keyframes pageTransitionEnter {
+  from {
+    opacity: 0;
+    transform: translateY(100vh);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pageTransitionEnterChild {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition-entering {
+  animation: pageTransitionEnter 0.9s
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page-transition-entering > * {
+  animation: pageTransitionEnterChild 0.55s
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page-transition-entering > :nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.page-transition-entering > :nth-child(3) {
+  animation-delay: 160ms;
+}
+
+.page-transition-entering > :nth-child(4) {
+  animation-delay: 240ms;
 }
 
 /* Keep text readable over the particle network */
@@ -376,16 +420,14 @@ html[data-scroll="up"] .navbar-links a.active::after {
     animation: none;
   }
 
-  .portfolio-page--reveal-ready .page-section .section-container {
+  .page-transition-leaving,
+  .page-transition-entering,
+  .page-transition-entering > * {
+    animation: none;
     opacity: 1;
     transform: none;
-    transition: none;
   }
 
-  .portfolio-page--reveal-ready #experience.is-visible .experience-entry-content,
-  .portfolio-page--reveal-ready #experience.is-visible .education-entry {
-    animation: none;
-  }
 }
 
 .section-label {

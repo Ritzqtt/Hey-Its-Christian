@@ -1,5 +1,9 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import {
+  finishPageTransition,
+  startPageTransitionEntrance,
+} from "../utils/pageTransition";
 
 import Navbar from "../components/Navbar";
 
@@ -13,46 +17,27 @@ function Portfolio() {
   const location = useLocation();
 
   useEffect(() => {
-    const portfolio = document.querySelector(".portfolio-page");
-    const sections = portfolio?.querySelectorAll(".page-section");
-
-    if (
-      !portfolio ||
-      !sections?.length ||
-      !("IntersectionObserver" in window) ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return undefined;
-    }
-
-    portfolio.classList.add("portfolio-page--reveal-ready");
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        });
-      },
-      {
-        rootMargin: "0px 0px -10% 0px",
-        threshold: 0,
-      }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-
-    return () => {
-      observer.disconnect();
-      portfolio.classList.remove("portfolio-page--reveal-ready");
-      sections.forEach((section) => section.classList.remove("is-visible"));
-    };
-  }, []);
-
-  useEffect(() => {
     const id = location.hash.replace("#", "");
+    const transitionId = location.state?.pageTransitionId;
+
+    if (transitionId && id) {
+      const section = document.getElementById(id);
+      const content = section?.querySelector(".section-container");
+
+      if (!section || !content) {
+        finishPageTransition();
+        return undefined;
+      }
+
+      const navbarHeight =
+        document.querySelector(".navbar")?.offsetHeight ?? 0;
+      const targetTop =
+        section.getBoundingClientRect().top + window.scrollY - navbarHeight;
+
+      if (startPageTransitionEntrance(content, transitionId, targetTop)) {
+        return undefined;
+      }
+    }
 
     if (!id) {
       window.scrollTo({ top: 0, behavior: "auto" });
@@ -67,19 +52,21 @@ function Portfolio() {
 
       const navbar = document.querySelector(".navbar");
       const navbarHeight = navbar ? navbar.offsetHeight : 0;
-
-      // Align the top of the section exactly under the fixed navbar.
       const top =
         section.getBoundingClientRect().top + window.scrollY - navbarHeight;
 
       window.scrollTo({
         top: Math.max(top, 0),
-        behavior: "smooth",
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
       });
     });
 
-    return () => cancelAnimationFrame(frame);
-  }, [location.pathname, location.hash, location.key]);
+    return () => {
+      cancelAnimationFrame(frame);
+    };
+  }, [location.pathname, location.hash, location.key, location.state]);
 
   return (
     <div className="portfolio-page">

@@ -1,5 +1,7 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import usePageTransition from "../hooks/usePageTransition";
+import { startPageTransitionEntrance } from "../utils/pageTransition";
 import facebookIcon from "../assets/icons/facebook.png";
 import instagramIcon from "../assets/icons/instagram.png";
 import xIcon from "../assets/icons/x.png";
@@ -25,9 +27,21 @@ const navLinks = [
 ];
 
 function Home() {
+  const location = useLocation();
+  const goToPage = usePageTransition();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+
+    const transitionId = location.state?.pageTransitionId;
+    if (transitionId) {
+      startPageTransitionEntrance(
+        document.querySelector(".home-content"),
+        transitionId,
+        0
+      );
+    }
+  }, [location.key, location.state]);
 
   return (
     <section id="home" className="home-page">
@@ -43,7 +57,7 @@ function Home() {
             <Link
               key={link.name}
               to={link.to}
-              className={link.name === "Home" ? "active" : ""}
+              onClick={(event) => goToPage(event, link.to)}
             >
               &gt; {link.name}
             </Link>
