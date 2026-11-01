@@ -5,6 +5,7 @@ import instagramIcon from "../assets/icons/instagram.png";
 import xIcon from "../assets/icons/x.png";
 import tiktokIcon from "../assets/icons/tiktok.png";
 import githubIcon from "../assets/icons/github.png";
+import linkedinIcon from "../assets/icons/linkedin.png";
 
 const socialLinks = [
   { name: "Facebook", icon: facebookIcon, url: "https://www.facebook.com/christian.olbes.18" },
@@ -12,6 +13,7 @@ const socialLinks = [
   { name: "X", icon: xIcon, url: "https://x.com/kwiishii" },
   { name: "TikTok", icon: tiktokIcon, url: "https://www.tiktok.com/@ritzqtt" },
   { name: "GitHub", icon: githubIcon, url: "https://github.com/Ritzqtt" },
+  { name: "LinkedIn", icon: linkedinIcon, url: "https://www.linkedin.com/in/cobarcoma" },
 ];
 
 const navLinks = [
