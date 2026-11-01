@@ -3,12 +3,15 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Portfolio from "./pages/Portfolio";
 import ParticleNetwork from "./components/ParticleNetwork";
+import LoadingScreen from "./components/LoadingScreen";
 
 import "./App.css";
 
 function App() {
   return (
     <>
+      <LoadingScreen />
+
       <ParticleNetwork />
 
       <Routes>
