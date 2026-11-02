@@ -1,4 +1,4 @@
-# Christian Barcoma — Developer Portfolio
+# Christian Barcoma | Junior Developer, Philippines
 
 A personal portfolio showcasing my projects, skills, experience, and ways to get in touch.
 
