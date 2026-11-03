@@ -7,17 +7,22 @@ import xIcon from "../assets/icons/x.png";
 import githubIcon from "../assets/icons/github.png";
 import linkedinIcon from "../assets/icons/linkedin.png";
 import jobstreetIcon from "../assets/icons/jobstreet.png";
+import instagramIcon from "../assets/icons/instagram.png";
+import tiktokIcon from "../assets/icons/tiktok.png";
 
 const CONTACT_EMAIL = "cobarcoma@gmail.com";
 const MAX_MESSAGE_LENGTH = 1000;
 const SUBMIT_INTERVAL = 30_000;
 
 const socialLinks = [
-  { name: "GitHub", icon: githubIcon, url: "https://github.com/Ritzqtt" },
   {
     name: "LinkedIn",
     icon: linkedinIcon,
     url: "https://www.linkedin.com/in/cobarcoma",
+  },
+  { name: "GitHub", 
+    icon: githubIcon, 
+    url: "https://github.com/Ritzqtt" 
   },
   {
     name: "JobStreet",
@@ -25,20 +30,23 @@ const socialLinks = [
     url: "https://ph.jobstreet.com/profiles/christian-barcoma-cbkkwcncfv",
   },
   {
+    name: "Instagram",
+    icon: instagramIcon,
+    url: "https://www.instagram.com/ritzqt_/",
+  },
+  {
     name: "Facebook",
     icon: facebookIcon,
     url: "https://www.facebook.com/christian.olbes.18",
   },
   {
-    name: "Instagram",
-    icon: "instagram",
-    url: "https://www.instagram.com/ritzqt_/",
-  },
-  { name: "X", icon: xIcon, url: "https://x.com/kwiishii" },
-  {
     name: "TikTok",
-    icon: "tiktok",
+    icon: tiktokIcon,
     url: "https://www.tiktok.com/@ritzqtt",
+  },
+  { name: "X", 
+    icon: xIcon, 
+    url: "https://x.com/kwiishii" 
   },
 ];
 
