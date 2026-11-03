@@ -6,7 +6,6 @@ import facebookIcon from "../assets/icons/facebook.png";
 import xIcon from "../assets/icons/x.png";
 import githubIcon from "../assets/icons/github.png";
 import linkedinIcon from "../assets/icons/linkedin.png";
-import indeedIcon from "../assets/icons/indeed.png";
 import jobstreetIcon from "../assets/icons/jobstreet.png";
 
 const CONTACT_EMAIL = "cobarcoma@gmail.com";
@@ -19,11 +18,6 @@ const socialLinks = [
     name: "LinkedIn",
     icon: linkedinIcon,
     url: "https://www.linkedin.com/in/cobarcoma",
-  },
-  {
-    name: "Indeed",
-    icon: indeedIcon,
-    url: "https://www.indeed.com/",
   },
   {
     name: "JobStreet",
