@@ -5,7 +5,7 @@ const skillCategories = [
   },
   {
     title: "LIBRARIES & FRAMEWORKS",
-    skills: ["Bootstrap", "Express.js", "Next.js", "Node.js", "React.js", "Tailwind CSS"],
+    skills: ["Bootstrap", "Express.js", "Next.js", "Node.js", "React.js", "Resend", "Tailwind CSS"],
   },
   {
     title: "DATABASE",
