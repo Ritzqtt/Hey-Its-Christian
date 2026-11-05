@@ -209,7 +209,18 @@ function Navbar() {
           aria-controls="primary-navigation"
           onClick={() => setMenuOpen((open) => !open)}
         >
-          {menuOpen ? "✕" : "☰"}
+          <span
+            className={`navbar-toggle-icon navbar-toggle-icon-menu${menuOpen ? " is-hidden" : ""}`}
+            aria-hidden="true"
+          >
+            ☰
+          </span>
+          <span
+            className={`navbar-toggle-icon navbar-toggle-icon-close${menuOpen ? " is-visible" : ""}`}
+            aria-hidden="true"
+          >
+            ✕
+          </span>
         </button>
 
         <nav

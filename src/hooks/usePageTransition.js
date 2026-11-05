@@ -2,17 +2,6 @@ import { useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { startPageTransition } from "../utils/pageTransition";
 
-function getVisibleSectionId() {
-  const viewportCenter = window.innerHeight / 2;
-  const sections = [...document.querySelectorAll(".page-section")];
-  const visible = sections.find((section) => {
-    const bounds = section.getBoundingClientRect();
-    return bounds.top <= viewportCenter && bounds.bottom >= viewportCenter;
-  });
-
-  return visible?.id;
-}
-
 function usePageTransition(onNavigate) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -41,18 +30,12 @@ function usePageTransition(onNavigate) {
 
       if (isSameLocation) {
         event.preventDefault();
+        navigate(targetUrl, { replace: true, state: location.state });
         onNavigate?.();
         return;
       }
 
       if (location.pathname !== "/") {
-        if (
-          target.pathname === location.pathname &&
-          targetId &&
-          targetId === getVisibleSectionId()
-        ) {
-          event.preventDefault();
-        }
         onNavigate?.();
         return;
       }
@@ -73,7 +56,14 @@ function usePageTransition(onNavigate) {
 
       if (accepted) onNavigate?.();
     },
-    [location.hash, location.pathname, location.search, navigate, onNavigate]
+    [
+      location.hash,
+      location.pathname,
+      location.search,
+      location.state,
+      navigate,
+      onNavigate,
+    ]
   );
 }
 
