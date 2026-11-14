@@ -6,7 +6,7 @@ const projects = [
     title: "EnovAcc",
     category: "Web-Based Accounting System",
     description:
-      "A web-based accounting system designed to manage financial transactions, bank reconciliation, payroll summaries, and tax computations.",
+      "EnovAcc is a web-based Financial Management System designed to centralize accounting operations, streamline financial transactions, automate financial reporting, and support Philippine tax computation for Enov8tive Technology Solutions Inc.",
     technologies: ["React.js", "JavaScript", "HTML","CSS","Node.js", "Express.js", "Supabase", "PostgreSQL"],
     status: "In Development",
     github: "https://github.com/Ritzqtt/EnovAcc.git",
@@ -16,7 +16,7 @@ const projects = [
     title: "CJFoodieSarap",
     category: "Business Website",
     description:
-      "A responsive catering website for a Taguig-based party food business, with an interactive tray menu that builds an order and sends it to Messenger, plus packages, bilao sets, an inquiry form, and an embedded map.",
+      "A food catering website for CJFoodieSarap, showcasing party trays, bilao packages, and food-packed meals. Built to help customers explore food offerings and conveniently connect with the business.",
     technologies: ["React", "Vite", "Tailwind CSS", "JavaScript", "Google Maps Embed"],
     status: "Completed",
     github: "https://github.com/Ritzqtt/CJFoodieSarap",
