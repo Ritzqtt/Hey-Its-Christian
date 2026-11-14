@@ -9,8 +9,8 @@ const projects = [
       "A web-based accounting system designed to manage financial transactions, bank reconciliation, payroll summaries, and tax computations.",
     technologies: ["React.js", "JavaScript", "HTML","CSS","Node.js", "Express.js", "Supabase", "PostgreSQL"],
     status: "In Development",
-    github: "",
-    liveUrl: "",
+    github: "https://github.com/Ritzqtt/EnovAcc.git",
+    liveUrl: "https://enovacc.vercel.app/",
   },
   {
     title: "CJFoodieSarap",
